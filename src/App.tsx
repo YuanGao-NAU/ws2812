@@ -1,31 +1,19 @@
-import './App.css'
-import PixelGridZ from './PixelGridZ';
-import PixelGridS from './PixelGridS.tsx';
-import {Directions, StartFrom} from  "./utils.ts";
+import AppHeader from "./AppHeader";
+import AppContent from "./AppContent";
+import { Layout } from "antd";
+import { Directions, StartFrom, Mode } from './utils';
+import { useState } from "react";
 
-function App() {
+const App = () => {
+    const [direction, setDirection] = useState(Directions.TopToBottom);
+    const [startFrom, setStartFrom] = useState(StartFrom.UpperLeft);
+    const [mode, setMode] = useState(Mode.S);
 
-  return (
-    <>
-      {/* <PixelGridZ rows={4} columns={8} direction={Directions.TopToBottom} startFrom={StartFrom.UpperLeft} />
-      <PixelGridZ rows={4} columns={8} direction={Directions.TopToBottom} startFrom={StartFrom.UpperRight} />
-      <PixelGridZ rows={4} columns={8} direction={Directions.BottomToTop} startFrom={StartFrom.LowerLeft} />
-      <PixelGridZ rows={4} columns={8} direction={Directions.BottomToTop} startFrom={StartFrom.LowerRight} />
-      <PixelGridZ rows={4} columns={8} direction={Directions.LeftToRight} startFrom={StartFrom.UpperLeft} />
-      <PixelGridZ rows={4} columns={8} direction={Directions.LeftToRight} startFrom={StartFrom.LowerLeft} />
-      <PixelGridZ rows={4} columns={8} direction={Directions.RightToLeft} startFrom={StartFrom.UpperRight} />
-      <PixelGridZ rows={4} columns={8} direction={Directions.RightToLeft} startFrom={StartFrom.LowerRight} /> */}
-
-      {/* <PixelGridS rows={4} columns={8} direction={Directions.TopToBottom} startFrom={StartFrom.UpperLeft} />
-      <PixelGridS rows={4} columns={8} direction={Directions.TopToBottom} startFrom={StartFrom.UpperRight} />
-      <PixelGridS rows={4} columns={8} direction={Directions.BottomToTop} startFrom={StartFrom.LowerLeft} />
-      <PixelGridS rows={4} columns={8} direction={Directions.BottomToTop} startFrom={StartFrom.LowerRight} /> */}
-      <PixelGridS rows={4} columns={8} direction={Directions.LeftToRight} startFrom={StartFrom.UpperLeft} />
-      <PixelGridS rows={4} columns={8} direction={Directions.LeftToRight} startFrom={StartFrom.LowerLeft} />
-      <PixelGridS rows={4} columns={8} direction={Directions.RightToLeft} startFrom={StartFrom.UpperRight} />
-      <PixelGridS rows={4} columns={8} direction={Directions.RightToLeft} startFrom={StartFrom.LowerRight} />
-    </>
-  )
+    return (<Layout style={{ height: '100vh' }}>
+        <AppHeader setDirection={setDirection} setStartFrom={setStartFrom} setMode={setMode}/>
+        <AppContent rows={4} columns={4} direction={direction} startFrom={startFrom} mode={mode}/>
+    </Layout>
+    )
 }
 
 export default App;

@@ -11,3 +11,8 @@ export enum StartFrom {
     UpperLeft,
     UpperRight,
 }
+
+export enum Mode {
+    S,
+    Z,
+}

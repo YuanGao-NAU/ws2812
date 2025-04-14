@@ -18,6 +18,7 @@ const PixelGridS = (props: PixelArtProps) => {
                         key={colIndex}
                         startIndex={colIndex * props.rows}
                         rows={props.rows}
+                        bottomToTop={colIndex % 2 === 0 ? false : true}
                     />
                 ))}
             </div>}
@@ -31,6 +32,7 @@ const PixelGridS = (props: PixelArtProps) => {
                         key={colIndex}
                         startIndex={startIndex}
                         rows={props.rows}
+                        bottomToTop={colIndex % 2 === 0 ? false : true}
                     />
                 );
                 })}
@@ -46,7 +48,7 @@ const PixelGridS = (props: PixelArtProps) => {
                         key={colIndex}
                         startIndex={startIndex}
                         rows={props.rows}
-                        bottomToTop // control internal column direction
+                        bottomToTop={colIndex % 2 === 0 ? false : true}
                     />
                 );
                 })}
@@ -62,19 +64,20 @@ const PixelGridS = (props: PixelArtProps) => {
                         key={colIndex}
                         startIndex={startIndex}
                         rows={props.rows}
-                        bottomToTop // control internal column direction
+                        bottomToTop={colIndex % 2 === 0 ? false : true}
                     />
                 );
                 })}
             </div>}
 
             {props.direction === Directions.LeftToRight && props.startFrom === StartFrom.UpperLeft && <div>
-            {Array.from({ length: props.rows }, (_, i) => {
+            {Array.from({ length: props.rows }, (_, rowIndex) => {
                 return (
                     <PixelRow
-                        key={i}
-                        startIndex={i * props.columns}
+                        key={rowIndex}
+                        startIndex={rowIndex * props.columns}
                         columns={props.columns}
+                        rightToLeft={rowIndex % 2 === 0 ? false : true}
                     />
                 )
                 })}   
@@ -89,19 +92,20 @@ const PixelGridS = (props: PixelArtProps) => {
                         key={rowIndex}
                         startIndex={startIndex}
                         columns={props.columns}
+                        rightToLeft={rowIndex % 2 === 0 ? false : true}
                     />
                 )
                 })}  
             </div>}
 
             {props.direction === Directions.RightToLeft && props.startFrom === StartFrom.UpperRight && <div>
-            {Array.from({ length: props.rows }, (_, i) => {
+            {Array.from({ length: props.rows }, (_, rowIndex) => {
                 return (
                     <PixelRow
-                        key={i}
-                        startIndex={i * props.columns}
+                        key={rowIndex}
+                        startIndex={rowIndex * props.columns}
                         columns={props.columns}
-                        rightToLeft
+                        rightToLeft={rowIndex % 2 === 0 ? true : false}
                     />
                 )
                 })}      
@@ -116,7 +120,7 @@ const PixelGridS = (props: PixelArtProps) => {
                         key={rowIndex}
                         startIndex={startIndex}
                         columns={props.columns}
-                        rightToLeft
+                        rightToLeft={rowIndex % 2 === 0 ? true : false}
                     />
                 )
                 })}      

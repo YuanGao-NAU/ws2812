@@ -2,6 +2,7 @@ import { Layout } from 'antd';
 import PixelGridS from './PixelGridS';
 import PixelGridZ from './PixelGridZ';
 import { Directions, StartFrom, Mode } from './utils';
+import { Row, Col, Card } from 'antd';
 
 interface AppContentProps {
     direction: Directions;
@@ -11,30 +12,17 @@ interface AppContentProps {
     columns: number;
 }
 
-const { Content } = Layout;
-
 const AppContent = ({rows, columns, direction=Directions.LeftToRight, startFrom=StartFrom.UpperLeft, mode=Mode.S}: AppContentProps) => {
-    return <Content
-        style={{
-            padding: 24,
-            background: '#f5f5f5',
-            overflow: 'auto',
-        }}
-        >
-        <div
-            style={{
-            background: '#fff',
-            padding: 16,
-            minHeight: '100%',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            }}
-        >
-            {mode === Mode.S ? <PixelGridS rows={rows} columns={columns} direction={direction} startFrom={startFrom} /> :
-                <PixelGridZ rows={rows} columns={columns} direction={direction} startFrom={startFrom} />}            
-        </div>
-    </Content>
+    return (
+        
+      <Row justify="center" gutter={[16, 16]}>
+        <Col flex="none">
+        {mode === Mode.S ? <PixelGridS rows={rows} columns={columns} direction={direction} startFrom={startFrom} /> :
+                <PixelGridZ rows={rows} columns={columns} direction={direction} startFrom={startFrom} />}           
+        </Col>
+      </Row>
+    
+    )
 }
 
 export default AppContent;

@@ -10,7 +10,7 @@ interface PixelSetProps {
 const PixelRow = (props: PixelSetProps) => {
     
     const pixels = Array.from({ length: props.columns }, (_, index) => (
-        <Pixel index={props.startIndex + index}/>
+        <Pixel key={props.startIndex + index} index={props.startIndex + index}/>
       ))
 
     return (

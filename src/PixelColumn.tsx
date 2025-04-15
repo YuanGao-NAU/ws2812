@@ -9,7 +9,7 @@ interface PixelColumnProps {
   
   const PixelColumn = ({ startIndex, rows, bottomToTop = false }: PixelColumnProps) => {
     const pixels = Array.from({ length: rows }, (_, i) => (
-      <Pixel key={i} index={startIndex + i} />
+      <Pixel key={i + startIndex} index={startIndex + i} />
     ));
   
     return (

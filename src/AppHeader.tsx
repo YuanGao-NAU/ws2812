@@ -1,17 +1,17 @@
-import { Layout, Select, Space, Typography } from 'antd';
+import { Col, InputNumber, Layout, Row, Select, Space, Typography } from 'antd';
 import { Directions, Mode, StartFrom } from './utils';
+import { debounce } from 'lodash';
+import { useEffect, useCallback } from 'react';
 
-const { Header } = Layout;
 const { Option } = Select;
-const { Title } = Typography;
+const { Title,Text } = Typography;
 
 interface AppHeaderProps {
   setDirection: (direction: Directions) => void;
   setStartFrom: (startFrom: StartFrom) => void;
   setMode: (mode: Mode) => void;
-  // direction: Directions;
-  // startFrom: StartFrom;
-  // mode: Mode;
+  setRows: (rows: any) => void;
+  setColumns: (columns: any) => void;
 }
 
 const AppHeader = (props: AppHeaderProps) => {
@@ -77,43 +77,78 @@ const AppHeader = (props: AppHeaderProps) => {
     props.setMode(mode);
   }
 
+  const delayedSetRows = useCallback(debounce((value: any) => {
+    console.log(value);
+    props.setRows(value);
+  }, 500), []);
+
+  const delayedSetColumns = useCallback(debounce((value: any) => {
+    console.log(value);
+    props.setColumns(value);
+  }, 500), []);
+
   return (
-      <Header
-        style={{
-          background: '#fff',
-          padding: '0 24px',
-          borderBottom: '1px solid #f0f0f0',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}
+    <div style={{ width: '100%', padding: '24px 16px' }}>
+      {/* Title Row */}
+      <Row justify="center">
+        <Col>
+          <Title level={2} style={{ margin: 0, textAlign: 'center' }}>
+            Pixel Art Generator
+          </Title>
+        </Col>
+      </Row>
+
+      {/* Selects Row */}
+      <Row
+        justify="center"
+        gutter={[16, 16]}
+        style={{ marginTop: 16 }}
       >
-        <Title level={4} style={{ margin: 0 }}>
-          Pixel Grid Config
-        </Title>
+        <Col xs={12} sm={6} md={4} lg={3}>
+                 
+             <Text>Direction</Text>
+             <Select defaultValue="TopToBottom" style={{ width: '100%' }} onChange={(value) => onDirectionChange(value)}>
+               <Option value="TopToBottom">Top to Bottom</Option>
+               <Option value="BottomToTop">Bottom to Top</Option>
+               <Option value="LeftToRight">Left to Right</Option>
+               <Option value="RightToLeft">Right to Left</Option>
+             </Select>
+             </Col>
 
-        <Space>
-          <Select defaultValue="TopToBottom" style={{ width: 120 }} onChange={(value) => onDirectionChange(value)}>
-            <Option value="TopToBottom">Top to Bottom</Option>
-            <Option value="BottomToTop">Bottom to Top</Option>
-            <Option value="LeftToRight">Left to Right</Option>
-            <Option value="RightToLeft">Right to Left</Option>
-          </Select>
+             <Col xs={12} sm={6} md={4} lg={3}>
+             <Text>Start From</Text>
+             <Select defaultValue="UpperLeft" style={{ width: '100%' }} onChange={(value) => onStartFromChange(value)}>
+               <Option value="UpperLeft">Higher Left</Option>
+               <Option value="UpperRight">Higher Right</Option>
+               <Option value="LowerLeft">Lower Left</Option>
+               <Option value="LowerRight">Lower Right</Option>
+             </Select>
+             </Col>
 
-          <Select defaultValue="UpperLeft" style={{ width: 120 }} onChange={(value) => onStartFromChange(value)}>
-            <Option value="UpperLeft">Higher Left</Option>
-            <Option value="UpperRight">Higher Right</Option>
-            <Option value="LowerLeft">Lower Left</Option>
-            <Option value="LowerRight">Lower Right</Option>
-          </Select>
+             <Col xs={12} sm={6} md={4} lg={3}>
+             <Text>Mode</Text>
+             <Select defaultValue="S" style={{ width: '100%' }} onChange={(value) => onModeChange(value)}>
+               <Option value="S">S</Option>
+               <Option value="Z">Z</Option>
+             </Select>
+             </Col>
 
-          <Select defaultValue="S" style={{ width: 80 }} onChange={(value) => onModeChange(value)}>
-            <Option value="S">S</Option>
-            <Option value="Z">Z</Option>
-          </Select>
-        </Space>
-      </Header>
-  );
-};
+             <Col xs={12} sm={6} md={4} lg={3}>
+             <Text>Rows</Text>
+             <InputNumber style={{ width: '100%' }} onChange={delayedSetRows}/>
+             </Col>
+
+             <Col xs={12} sm={6} md={4} lg={3}>
+             <Text>Columns</Text>
+             <InputNumber style={{ width: '100%' }} onChange={delayedSetColumns}/>
+             </Col>
+           
+        
+      </Row>
+    </div>
+  )
+}
+
+
 
 export default AppHeader;

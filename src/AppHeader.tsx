@@ -1,7 +1,6 @@
-import { Col, InputNumber, Layout, Row, Select, Space, Typography } from 'antd';
+import { Button, Col, Form, InputNumber, Row, Select, Typography } from 'antd';
 import { Directions, Mode, StartFrom } from './utils';
-import { debounce } from 'lodash';
-import { useEffect, useCallback } from 'react';
+import { useState } from 'react';
 
 const { Option } = Select;
 const { Title,Text } = Typography;
@@ -12,10 +11,13 @@ interface AppHeaderProps {
   setMode: (mode: Mode) => void;
   setRows: (rows: any) => void;
   setColumns: (columns: any) => void;
+  handleOnChange: () => void;
 }
 
 const AppHeader = (props: AppHeaderProps) => {
 
+  const [form] = Form.useForm();
+  
   const onDirectionChange = (value: string) => {
     var direction = Directions.TopToBottom;
     switch(value) {
@@ -77,15 +79,19 @@ const AppHeader = (props: AppHeaderProps) => {
     props.setMode(mode);
   }
 
-  const delayedSetRows = useCallback(debounce((value: any) => {
-    console.log(value);
-    props.setRows(value);
-  }, 500), []);
+  const onFinish = (values: any) => {
+    console.log(values);
+    onDirectionChange(values.direction);
+    onStartFromChange(values.startFrom);
+    onModeChange(values.mode);
+    props.setRows(values.rows);
+    props.setColumns(values.columns);
+    props.handleOnChange();
+  }
 
-  const delayedSetColumns = useCallback(debounce((value: any) => {
-    console.log(value);
-    props.setColumns(value);
-  }, 500), []);
+  const onFinishFailed = (errorInfo: any) => {
+    console.log('Failed:', errorInfo);
+  };
 
   return (
     <div style={{ width: '100%', padding: '24px 16px' }}>
@@ -104,51 +110,89 @@ const AppHeader = (props: AppHeaderProps) => {
         gutter={[16, 16]}
         style={{ marginTop: 16 }}
       >
-        <Col xs={12} sm={6} md={4} lg={3}>
-                 
-             <Text>Direction</Text>
-             <Select defaultValue="TopToBottom" style={{ width: '100%' }} onChange={(value) => onDirectionChange(value)}>
-               <Option value="TopToBottom">Top to Bottom</Option>
-               <Option value="BottomToTop">Bottom to Top</Option>
-               <Option value="LeftToRight">Left to Right</Option>
-               <Option value="RightToLeft">Right to Left</Option>
-             </Select>
-             </Col>
+        <Form 
+          name="form"
+          layout='inline'
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          form={form}
+          initialValues={{ "direction": "TopToBottom", "startFrom": "UpperLeft", "Mode": "S", "rows": 4, "columns": 4 }}
+        >
+          {/* <Col xs={12} sm={6} md={4} lg={3}>     */}
+            {/* <Text>Direction</Text> */}
+            <Form.Item name="direction" label="Direction">
+              <Select style={{ width: '100%' }}>
+                <Option value="TopToBottom">Top to Bottom</Option>
+                <Option value="BottomToTop">Bottom to Top</Option>
+                <Option value="LeftToRight">Left to Right</Option>
+                <Option value="RightToLeft">Right to Left</Option>
+              </Select>
+            </Form.Item>
+          {/* </Col> */}
 
-             <Col xs={12} sm={6} md={4} lg={3}>
-             <Text>Start From</Text>
-             <Select defaultValue="UpperLeft" style={{ width: '100%' }} onChange={(value) => onStartFromChange(value)}>
-               <Option value="UpperLeft">Higher Left</Option>
-               <Option value="UpperRight">Higher Right</Option>
-               <Option value="LowerLeft">Lower Left</Option>
-               <Option value="LowerRight">Lower Right</Option>
-             </Select>
-             </Col>
+          {/* <Col xs={12} sm={6} md={4} lg={3}> */}
+            {/* <Text>Start From</Text> */}
+            <Form.Item name="startFrom" label="Start From">
+              <Select style={{ width: '100%' }}>
+                <Option value="UpperLeft">Higher Left</Option>
+                <Option value="UpperRight">Higher Right</Option>
+                <Option value="LowerLeft">Lower Left</Option>
+                <Option value="LowerRight">Lower Right</Option>
+              </Select>
+            </Form.Item>
+          {/* </Col> */}
 
-             <Col xs={12} sm={6} md={4} lg={3}>
-             <Text>Mode</Text>
-             <Select defaultValue="S" style={{ width: '100%' }} onChange={(value) => onModeChange(value)}>
-               <Option value="S">S</Option>
-               <Option value="Z">Z</Option>
-             </Select>
-             </Col>
+          {/* <Col xs={12} sm={6} md={4} lg={3}> */}
+            {/* <Text>Mode</Text> */}
+            <Form.Item name="mode" label="Mode">
+              <Select style={{ width: '100%' }}>
+                <Option value="S">S</Option>
+                <Option value="Z">Z</Option>
+              </Select>
+            </Form.Item>
+          {/* </Col> */}
 
-             <Col xs={12} sm={6} md={4} lg={3}>
-             <Text>Rows</Text>
-             <InputNumber style={{ width: '100%' }} onChange={delayedSetRows}/>
-             </Col>
+          {/* <Col xs={12} sm={6} md={4} lg={3}> */}
+            {/* <Text>Rows</Text> */}
+            <Form.Item 
+              name="rows" 
+              label="Rows" 
+              rules={[
+                {
+                    required: true,
+                    message: "This field is required"
+                },
+              ]}
+            >
+              <InputNumber style={{ width: '100%' }}/>
+            </Form.Item>
+          {/* </Col> */}
 
-             <Col xs={12} sm={6} md={4} lg={3}>
-             <Text>Columns</Text>
-             <InputNumber style={{ width: '100%' }} onChange={delayedSetColumns}/>
-             </Col>
-           
-        
+          {/* <Col xs={12} sm={6} md={4} lg={3}> */}
+            {/* <Text>Columns</Text> */}
+            <Form.Item 
+              name="columns" 
+              label="Columns" 
+              rules={[
+                {
+                    required: true,
+                    message: "This field is required"
+                },
+              ]}
+            >
+              <InputNumber style={{ width: '100%' }}/>
+            </Form.Item>
+          {/* </Col> */}
+
+          {/* <Col xs={12} sm={6} md={4} lg={3}> */}
+            <Form.Item>
+              <Button type={"primary"} htmlType={"submit"}>Submit</Button>
+            </Form.Item>
+          {/* </Col> */}
+        </Form>
       </Row>
     </div>
   )
 }
-
-
 
 export default AppHeader;

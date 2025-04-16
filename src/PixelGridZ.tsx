@@ -7,6 +7,14 @@ interface PixelArtProps {
     startFrom: StartFrom;
     rows: number;
     columns: number;
+    pixelControl: number[];
+    r: number[];
+    g: number[];
+    b: number[];
+    setPixelControl: (data: number[]) => void;
+    setR: (data: number[]) => void;
+    setG: (data: number[]) => void;
+    setB: (data: number[]) => void;
 }
 
 const PixelGridZ = (props: PixelArtProps) => {
@@ -18,6 +26,14 @@ const PixelGridZ = (props: PixelArtProps) => {
                         key={colIndex}
                         startIndex={colIndex * props.rows}
                         rows={props.rows}
+                        pixelControl={props.pixelControl}
+                        r={props.r} 
+                        g={props.g} 
+                        b={props.b}
+                        setPixelControl={props.setPixelControl}
+                        setR={props.setR}
+                        setG={props.setG}
+                        setB={props.setB}
                     />
                 ))}
             </div>}
@@ -31,6 +47,14 @@ const PixelGridZ = (props: PixelArtProps) => {
                         key={colIndex}
                         startIndex={startIndex}
                         rows={props.rows}
+                        pixelControl={props.pixelControl}
+                        r={props.r} 
+                        g={props.g} 
+                        b={props.b}
+                        setPixelControl={props.setPixelControl}
+                        setR={props.setR}
+                        setG={props.setG}
+                        setB={props.setB}
                     />
                 );
                 })}
@@ -46,7 +70,15 @@ const PixelGridZ = (props: PixelArtProps) => {
                         key={colIndex}
                         startIndex={startIndex}
                         rows={props.rows}
-                        bottomToTop // control internal column direction
+                        bottomToTop
+                        pixelControl={props.pixelControl}
+                        r={props.r} 
+                        g={props.g} 
+                        b={props.b}
+                        setPixelControl={props.setPixelControl}
+                        setR={props.setR}
+                        setG={props.setG}
+                        setB={props.setB}
                     />
                 );
                 })}
@@ -62,7 +94,15 @@ const PixelGridZ = (props: PixelArtProps) => {
                         key={colIndex}
                         startIndex={startIndex}
                         rows={props.rows}
-                        bottomToTop // control internal column direction
+                        bottomToTop
+                        pixelControl={props.pixelControl}
+                        r={props.r} 
+                        g={props.g} 
+                        b={props.b}
+                        setPixelControl={props.setPixelControl}
+                        setR={props.setR}
+                        setG={props.setG}
+                        setB={props.setB}
                     />
                 );
                 })}
@@ -75,6 +115,14 @@ const PixelGridZ = (props: PixelArtProps) => {
                         key={i}
                         startIndex={i * props.columns}
                         columns={props.columns}
+                        pixelControl={props.pixelControl}
+                        r={props.r} 
+                        g={props.g} 
+                        b={props.b}
+                        setPixelControl={props.setPixelControl}
+                        setR={props.setR}
+                        setG={props.setG}
+                        setB={props.setB}
                     />
                 )
                 })}   
@@ -89,6 +137,14 @@ const PixelGridZ = (props: PixelArtProps) => {
                         key={rowIndex}
                         startIndex={startIndex}
                         columns={props.columns}
+                        pixelControl={props.pixelControl}
+                        r={props.r} 
+                        g={props.g} 
+                        b={props.b}
+                        setPixelControl={props.setPixelControl}
+                        setR={props.setR}
+                        setG={props.setG}
+                        setB={props.setB}
                     />
                 )
                 })}  
@@ -102,6 +158,14 @@ const PixelGridZ = (props: PixelArtProps) => {
                         startIndex={i * props.columns}
                         columns={props.columns}
                         rightToLeft
+                        pixelControl={props.pixelControl}
+                        r={props.r} 
+                        g={props.g} 
+                        b={props.b}
+                        setPixelControl={props.setPixelControl}
+                        setR={props.setR}
+                        setG={props.setG}
+                        setB={props.setB}
                     />
                 )
                 })}      
@@ -117,6 +181,14 @@ const PixelGridZ = (props: PixelArtProps) => {
                         startIndex={startIndex}
                         columns={props.columns}
                         rightToLeft
+                        pixelControl={props.pixelControl}
+                        r={props.r} 
+                        g={props.g} 
+                        b={props.b}
+                        setPixelControl={props.setPixelControl}
+                        setR={props.setR}
+                        setG={props.setG}
+                        setB={props.setB}
                     />
                 )
                 })}      

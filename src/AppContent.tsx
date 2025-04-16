@@ -1,8 +1,7 @@
-import { Layout } from 'antd';
 import PixelGridS from './PixelGridS';
 import PixelGridZ from './PixelGridZ';
 import { Directions, StartFrom, Mode } from './utils';
-import { Row, Col, Card } from 'antd';
+import { Row, Col } from 'antd';
 
 interface AppContentProps {
     direction: Directions;
@@ -10,6 +9,14 @@ interface AppContentProps {
     mode: Mode;
     rows: number;
     columns: number;
+    pixelControl: number[];
+    r: number[];
+    g: number[];
+    b: number[];
+    setPixelControl: (data: number[]) => void;
+    setR: (data: number[]) => void;
+    setG: (data: number[]) => void;
+    setB: (data: number[]) => void;
 }
 
 const AppContent = ({rows, columns, direction=Directions.LeftToRight, startFrom=StartFrom.UpperLeft, mode=Mode.S}: AppContentProps) => {

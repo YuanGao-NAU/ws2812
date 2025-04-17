@@ -1,9 +1,10 @@
-import { Button, Col, Form, InputNumber, Row, Select, Typography } from 'antd';
+import { Button, Col, ColorPicker, Form, InputNumber, Row, Select, Space, Typography } from 'antd';
 import { Directions, Mode, StartFrom } from './utils';
-import { useState } from 'react';
+import { AggregationColor } from 'antd/es/color-picker/color';
+import ColorPalette from './ColorPalette';
 
 const { Option } = Select;
-const { Title,Text } = Typography;
+const { Title, Text } = Typography;
 
 interface AppHeaderProps {
   setDirection: (direction: Directions) => void;
@@ -12,6 +13,8 @@ interface AppHeaderProps {
   setRows: (rows: any) => void;
   setColumns: (columns: any) => void;
   handleOnChange: () => void;
+  color: string;
+  onColorChange: (value: AggregationColor) => void;
 }
 
 const AppHeader = (props: AppHeaderProps) => {
@@ -116,7 +119,7 @@ const AppHeader = (props: AppHeaderProps) => {
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           form={form}
-          initialValues={{ "direction": "TopToBottom", "startFrom": "UpperLeft", "Mode": "S", "rows": 4, "columns": 4 }}
+          initialValues={{ "direction": "TopToBottom", "startFrom": "UpperLeft", "mode": "S", "rows": 4, "columns": 4 }}
         >
           {/* <Col xs={12} sm={6} md={4} lg={3}>     */}
             {/* <Text>Direction</Text> */}
@@ -191,6 +194,17 @@ const AppHeader = (props: AppHeaderProps) => {
           {/* </Col> */}
         </Form>
       </Row>
+
+      <Row 
+        justify="center"
+        gutter={[16, 16]}
+        style={{ marginTop: 16 }}
+      >
+        <Col>
+          <ColorPalette color={props.color} onColorChange={props.onColorChange}/>
+        </Col>
+      </Row>
+
     </div>
   )
 }

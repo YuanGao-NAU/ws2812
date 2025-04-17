@@ -4,6 +4,7 @@ interface PixelColumnProps {
     startIndex: number;
     rows: number;
     bottomToTop?: boolean;
+    color: string;
     pixelControl: number[];
     r: number[];
     g: number[];
@@ -14,25 +15,26 @@ interface PixelColumnProps {
     setB: (data: number[]) => void;
   }
   
-  const PixelColumn = ({pixelControl, r, g, b, setPixelControl, setR, setG, setB, startIndex, rows, bottomToTop = false }: PixelColumnProps) => {
-    const pixels = Array.from({ length: rows }, (_, i) => (
+  const PixelColumn = (props: PixelColumnProps) => {
+    const pixels = Array.from({ length: props.rows }, (_, i) => (
       <Pixel 
-        key={i + startIndex} 
-        index={startIndex + i} 
-        pixelControl={pixelControl}
-        r={r} 
-        g={g} 
-        b={b}
-        setPixelControl={setPixelControl}
-        setR={setR}
-        setG={setG}
-        setB={setB}
+        key={i + props.startIndex} 
+        index={props.startIndex + i} 
+        color={props.color}
+        pixelControl={props.pixelControl}
+        r={props.r} 
+        g={props.g} 
+        b={props.b}
+        setPixelControl={props.setPixelControl}
+        setR={props.setR}
+        setG={props.setG}
+        setB={props.setB}
       />
     ));
   
     return (
       <div style={{ display: 'flex', flexDirection: 'column' }}>
-        {bottomToTop ? pixels.reverse() : pixels}
+        {props.bottomToTop ? pixels.reverse() : pixels}
       </div>
     );
   };

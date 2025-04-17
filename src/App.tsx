@@ -3,6 +3,7 @@ import AppContent from "./AppContent";
 import { Directions, StartFrom, Mode } from './utils';
 import { useState, useTransition } from "react";
 import AppFooter from "./AppFooter";
+import { AggregationColor } from "antd/es/color-picker/color";
 
 const App = () => {
     const [direction, setDirection] = useState(Directions.TopToBottom);
@@ -16,6 +17,7 @@ const App = () => {
     const [r, setR] = useState(new Array(rows * columns).fill(0));
     const [g, setG] = useState(new Array(rows * columns).fill(0));
     const [b, setB] = useState(new Array(rows * columns).fill(0));
+    const [color, setColor] = useState("#808080");
 
     const handleOnChange = () => {
         startTransition(() => {
@@ -23,9 +25,21 @@ const App = () => {
         })
     }
 
+    const onColorChange = (value: AggregationColor)=> {
+        setColor(value.toHexString());
+    }
+
     return (
         <div style={{ height: '100vh', width: '100vw', display: 'flex', flexDirection: 'column' }}>
-            <AppHeader setDirection={setDirection} setStartFrom={setStartFrom} setMode={setMode} setRows={setRows} setColumns={setColumns} handleOnChange={handleOnChange}/>
+            <AppHeader 
+                setDirection={setDirection} 
+                setStartFrom={setStartFrom} 
+                setMode={setMode} 
+                setRows={setRows} 
+                setColumns={setColumns} 
+                handleOnChange={handleOnChange} 
+                color={color} 
+                onColorChange={onColorChange}/>
             {isPending && <div style={{
                 display: 'flex',
                 justifyContent: 'center',
@@ -41,6 +55,7 @@ const App = () => {
                     direction={direction} 
                     startFrom={startFrom} 
                     mode={mode}
+                    color={color}
                     pixelControl={pixelControl}
                     r={r} 
                     g={g} 

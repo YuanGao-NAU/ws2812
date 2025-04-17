@@ -7,6 +7,7 @@ interface PixelArtProps {
     startFrom: StartFrom;
     rows: number;
     columns: number;
+    color: string;
     pixelControl: number[];
     r: number[];
     g: number[];
@@ -26,6 +27,7 @@ const PixelGridZ = (props: PixelArtProps) => {
                         key={colIndex}
                         startIndex={colIndex * props.rows}
                         rows={props.rows}
+                        color={props.color}
                         pixelControl={props.pixelControl}
                         r={props.r} 
                         g={props.g} 
@@ -47,6 +49,7 @@ const PixelGridZ = (props: PixelArtProps) => {
                         key={colIndex}
                         startIndex={startIndex}
                         rows={props.rows}
+                        color={props.color}
                         pixelControl={props.pixelControl}
                         r={props.r} 
                         g={props.g} 
@@ -71,6 +74,7 @@ const PixelGridZ = (props: PixelArtProps) => {
                         startIndex={startIndex}
                         rows={props.rows}
                         bottomToTop
+                        color={props.color}
                         pixelControl={props.pixelControl}
                         r={props.r} 
                         g={props.g} 
@@ -95,6 +99,7 @@ const PixelGridZ = (props: PixelArtProps) => {
                         startIndex={startIndex}
                         rows={props.rows}
                         bottomToTop
+                        color={props.color}
                         pixelControl={props.pixelControl}
                         r={props.r} 
                         g={props.g} 
@@ -115,6 +120,7 @@ const PixelGridZ = (props: PixelArtProps) => {
                         key={i}
                         startIndex={i * props.columns}
                         columns={props.columns}
+                        color={props.color}
                         pixelControl={props.pixelControl}
                         r={props.r} 
                         g={props.g} 
@@ -137,6 +143,7 @@ const PixelGridZ = (props: PixelArtProps) => {
                         key={rowIndex}
                         startIndex={startIndex}
                         columns={props.columns}
+                        color={props.color}
                         pixelControl={props.pixelControl}
                         r={props.r} 
                         g={props.g} 
@@ -158,6 +165,7 @@ const PixelGridZ = (props: PixelArtProps) => {
                         startIndex={i * props.columns}
                         columns={props.columns}
                         rightToLeft
+                        color={props.color}
                         pixelControl={props.pixelControl}
                         r={props.r} 
                         g={props.g} 
@@ -181,6 +189,7 @@ const PixelGridZ = (props: PixelArtProps) => {
                         startIndex={startIndex}
                         columns={props.columns}
                         rightToLeft
+                        color={props.color}
                         pixelControl={props.pixelControl}
                         r={props.r} 
                         g={props.g} 

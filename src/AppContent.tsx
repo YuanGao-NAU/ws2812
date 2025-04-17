@@ -9,6 +9,7 @@ interface AppContentProps {
     mode: Mode;
     rows: number;
     columns: number;
+    color: string;
     pixelControl: number[];
     r: number[];
     g: number[];
@@ -19,13 +20,40 @@ interface AppContentProps {
     setB: (data: number[]) => void;
 }
 
-const AppContent = ({rows, columns, direction=Directions.LeftToRight, startFrom=StartFrom.UpperLeft, mode=Mode.S}: AppContentProps) => {
+const AppContent = (props: AppContentProps) => {
     return (
         
       <Row justify="center" gutter={[16, 16]}>
         <Col flex="none">
-        {mode === Mode.S ? <PixelGridS rows={rows} columns={columns} direction={direction} startFrom={startFrom} /> :
-                <PixelGridZ rows={rows} columns={columns} direction={direction} startFrom={startFrom} />}           
+        {props.mode === Mode.S ? 
+                <PixelGridS 
+                  rows={props.rows} 
+                  columns={props.columns} 
+                  direction={props.direction} 
+                  startFrom={props.startFrom} 
+                  color={props.color}
+                  pixelControl={props.pixelControl}
+                  r={props.r}
+                  g={props.g}
+                  b={props.b}
+                  setPixelControl={props.setPixelControl}
+                  setR={props.setR}
+                  setG={props.setG}
+                  setB={props.setB}/> :
+                <PixelGridZ 
+                  rows={props.rows} 
+                  columns={props.columns} 
+                  direction={props.direction} 
+                  startFrom={props.startFrom} 
+                  color={props.color}
+                  pixelControl={props.pixelControl}
+                  r={props.r}
+                  g={props.g}
+                  b={props.b}
+                  setPixelControl={props.setPixelControl}
+                  setR={props.setR}
+                  setG={props.setG}
+                  setB={props.setB}/>}           
         </Col>
       </Row>
     

@@ -111,7 +111,7 @@ const AppHeader = (props: AppHeaderProps) => {
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           form={form}
-          initialValues={{ "direction": "vertical", "startFrom": "UpperLeft", "mode": "S", "rows": 4, "columns": 4 }}
+          initialValues={{ "direction": "horizontal", "startFrom": "UpperLeft", "mode": "S", "rows": 4, "columns": 4 }}
         >
           {/* <Col xs={12} sm={6} md={4} lg={3}>     */}
             {/* <Text>Direction</Text> */}

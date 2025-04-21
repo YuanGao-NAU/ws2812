@@ -5,6 +5,7 @@ interface PixelSetProps {
     columns: number;
     rightToLeft?: boolean;
     color: string;
+    resized: number;
     pixelControl: number[];
     r: number[];
     g: number[];
@@ -22,6 +23,7 @@ const PixelRow = (props: PixelSetProps) => {
           key={props.startIndex + index} 
           index={props.startIndex + index}
           color={props.color}
+          resized={props.resized}
           pixelControl={props.pixelControl}
           r={props.r} 
           g={props.g} 

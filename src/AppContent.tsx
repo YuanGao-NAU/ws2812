@@ -10,6 +10,7 @@ interface AppContentProps {
     rows: number;
     columns: number;
     color: string;
+    resized: number;
     pixelControl: number[];
     r: number[];
     g: number[];
@@ -32,6 +33,7 @@ const AppContent = (props: AppContentProps) => {
                   direction={props.direction} 
                   startFrom={props.startFrom} 
                   color={props.color}
+                  resized={props.resized}
                   pixelControl={props.pixelControl}
                   r={props.r}
                   g={props.g}
@@ -46,6 +48,7 @@ const AppContent = (props: AppContentProps) => {
                   direction={props.direction} 
                   startFrom={props.startFrom} 
                   color={props.color}
+                  resized={props.resized}
                   pixelControl={props.pixelControl}
                   r={props.r}
                   g={props.g}

@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from 'antd';
-import { AggregationColor } from 'antd/es/color-picker/color';
 
 interface BoxProps {
     index: number;
     pixelControl: number[];
     color: string;
+    resized: number;
     r: number[];
     g: number[];
     b: number[];
@@ -17,7 +17,7 @@ interface BoxProps {
 
 const Pixel = (props: BoxProps) => {
 
-    const [color, setColor] = useState("#000000");
+    const [color, setColor] = useState("#8c8c8c");
     const onClick = () => {
         setColor(props.color);
         const rgb = hexToRgb(props.color);
@@ -50,8 +50,21 @@ const Pixel = (props: BoxProps) => {
         return { r, g, b };
     }
 
+    useEffect(() => {
+        setColor("#8c8c8c");
+    }, [props.resized])
+
+    const onContextMenu = (e: any) => {
+        e.preventDefault();
+        setColor("#8c8c8c");
+        updateItem(props.index, 0, props.pixelControl, props.setPixelControl);
+        updateItem(props.index, 0, props.r, props.setR);
+        updateItem(props.index, 0, props.g, props.setG);
+        updateItem(props.index, 0, props.b, props.setB);
+    }
+
     return <>
-        <Button onClick={onClick} shape='circle' style={{backgroundColor: color, width: 30, height: 30}}>
+        <Button onClick={onClick} onContextMenu={onContextMenu} shape='circle' style={{backgroundColor: color, width: 30, height: 30}}>
             {props.index}
         </Button>
     </>

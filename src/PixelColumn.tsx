@@ -5,6 +5,7 @@ interface PixelColumnProps {
     rows: number;
     bottomToTop?: boolean;
     color: string;
+    resized: number;
     pixelControl: number[];
     r: number[];
     g: number[];
@@ -21,6 +22,7 @@ interface PixelColumnProps {
         key={i + props.startIndex} 
         index={props.startIndex + i} 
         color={props.color}
+        resized={props.resized}
         pixelControl={props.pixelControl}
         r={props.r} 
         g={props.g} 

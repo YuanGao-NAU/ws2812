@@ -1,8 +1,10 @@
 export enum Directions {
-    LeftToRight,
-    RightToLeft,
-    TopToBottom,
-    BottomToTop,
+    // LeftToRight,
+    // RightToLeft,
+    // TopToBottom,
+    // BottomToTop,
+    horizontal,
+    vertical,
 }
 
 export enum StartFrom {

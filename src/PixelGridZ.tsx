@@ -8,6 +8,7 @@ interface PixelArtProps {
     rows: number;
     columns: number;
     color: string;
+    resized: number;
     pixelControl: number[];
     r: number[];
     g: number[];
@@ -21,13 +22,14 @@ interface PixelArtProps {
 const PixelGridZ = (props: PixelArtProps) => {
     return (
         <>
-            {props.direction === Directions.TopToBottom && props.startFrom === StartFrom.UpperLeft && <div style={{ display: 'flex', flexDirection: 'row', gap: 8 }}>
+            {props.direction === Directions.vertical && props.startFrom === StartFrom.UpperLeft && <div style={{ display: 'flex', flexDirection: 'row', gap: 5 }}>
                 {Array.from({ length: props.columns }, (_, colIndex) => (
                     <PixelColumn
                         key={colIndex}
                         startIndex={colIndex * props.rows}
                         rows={props.rows}
                         color={props.color}
+                        resized={props.resized}
                         pixelControl={props.pixelControl}
                         r={props.r} 
                         g={props.g} 
@@ -40,7 +42,7 @@ const PixelGridZ = (props: PixelArtProps) => {
                 ))}
             </div>}
 
-            {props.direction === Directions.TopToBottom && props.startFrom === StartFrom.UpperRight && <div style={{ display: 'flex', flexDirection: 'row', gap: 8 }}>
+            {props.direction === Directions.vertical && props.startFrom === StartFrom.UpperRight && <div style={{ display: 'flex', flexDirection: 'row', gap: 5 }}>
             {Array.from({ length: props.columns }, (_, i) => {
                 const colIndex = props.columns - 1 - i; // reverse column order
                 const startIndex = colIndex * props.rows;     // same index logic, but reversed visually
@@ -50,6 +52,7 @@ const PixelGridZ = (props: PixelArtProps) => {
                         startIndex={startIndex}
                         rows={props.rows}
                         color={props.color}
+                        resized={props.resized}
                         pixelControl={props.pixelControl}
                         r={props.r} 
                         g={props.g} 
@@ -64,7 +67,7 @@ const PixelGridZ = (props: PixelArtProps) => {
 
             </div>}
 
-            {props.direction === Directions.BottomToTop && props.startFrom === StartFrom.LowerLeft && <div style={{ display: 'flex', flexDirection: 'row', gap: 8 }}>
+            {props.direction === Directions.vertical && props.startFrom === StartFrom.LowerLeft && <div style={{ display: 'flex', flexDirection: 'row', gap: 5 }}>
             {Array.from({ length: props.columns }, (_, i) => {
                 const colIndex = props.columns - 1 - i; // Left to right
                 const startIndex = i * props.rows;     // index goes normally (0, 4, 8...)
@@ -75,6 +78,7 @@ const PixelGridZ = (props: PixelArtProps) => {
                         rows={props.rows}
                         bottomToTop
                         color={props.color}
+                        resized={props.resized}
                         pixelControl={props.pixelControl}
                         r={props.r} 
                         g={props.g} 
@@ -89,7 +93,7 @@ const PixelGridZ = (props: PixelArtProps) => {
 
             </div>}
 
-            {props.direction === Directions.BottomToTop && props.startFrom === StartFrom.LowerRight && <div style={{ display: 'flex', flexDirection: 'row', gap: 8 }}>
+            {props.direction === Directions.vertical && props.startFrom === StartFrom.LowerRight && <div style={{ display: 'flex', flexDirection: 'row', gap: 5 }}>
             {Array.from({ length: props.columns }, (_, i) => {
                 const colIndex = props.columns - 1 - i;
                 const startIndex = colIndex * props.rows;
@@ -100,6 +104,7 @@ const PixelGridZ = (props: PixelArtProps) => {
                         rows={props.rows}
                         bottomToTop
                         color={props.color}
+                        resized={props.resized}
                         pixelControl={props.pixelControl}
                         r={props.r} 
                         g={props.g} 
@@ -113,7 +118,7 @@ const PixelGridZ = (props: PixelArtProps) => {
                 })}
             </div>}
 
-            {props.direction === Directions.LeftToRight && props.startFrom === StartFrom.UpperLeft && <div>
+            {props.direction === Directions.horizontal && props.startFrom === StartFrom.UpperLeft && <div>
             {Array.from({ length: props.rows }, (_, i) => {
                 return (
                     <PixelRow
@@ -121,6 +126,7 @@ const PixelGridZ = (props: PixelArtProps) => {
                         startIndex={i * props.columns}
                         columns={props.columns}
                         color={props.color}
+                        resized={props.resized}
                         pixelControl={props.pixelControl}
                         r={props.r} 
                         g={props.g} 
@@ -134,7 +140,7 @@ const PixelGridZ = (props: PixelArtProps) => {
                 })}   
             </div>} 
 
-            {props.direction === Directions.LeftToRight && props.startFrom === StartFrom.LowerLeft && <div>
+            {props.direction === Directions.horizontal && props.startFrom === StartFrom.LowerLeft && <div>
             {Array.from({ length: props.rows }, (_, i) => {
                 const rowIndex = props.rows - i - 1;
                 const startIndex = rowIndex * props.columns;
@@ -144,6 +150,7 @@ const PixelGridZ = (props: PixelArtProps) => {
                         startIndex={startIndex}
                         columns={props.columns}
                         color={props.color}
+                        resized={props.resized}
                         pixelControl={props.pixelControl}
                         r={props.r} 
                         g={props.g} 
@@ -157,7 +164,7 @@ const PixelGridZ = (props: PixelArtProps) => {
                 })}  
             </div>}
 
-            {props.direction === Directions.RightToLeft && props.startFrom === StartFrom.UpperRight && <div>
+            {props.direction === Directions.horizontal && props.startFrom === StartFrom.UpperRight && <div>
             {Array.from({ length: props.rows }, (_, i) => {
                 return (
                     <PixelRow
@@ -166,6 +173,7 @@ const PixelGridZ = (props: PixelArtProps) => {
                         columns={props.columns}
                         rightToLeft
                         color={props.color}
+                        resized={props.resized}
                         pixelControl={props.pixelControl}
                         r={props.r} 
                         g={props.g} 
@@ -179,7 +187,7 @@ const PixelGridZ = (props: PixelArtProps) => {
                 })}      
             </div>} 
 
-            {props.direction === Directions.RightToLeft && props.startFrom === StartFrom.LowerRight && <div>
+            {props.direction === Directions.horizontal && props.startFrom === StartFrom.LowerRight && <div>
             {Array.from({ length: props.rows }, (_, i) => {
                 const rowIndex = props.rows - i - 1;
                 const startIndex = rowIndex * props.columns;
@@ -190,6 +198,7 @@ const PixelGridZ = (props: PixelArtProps) => {
                         columns={props.columns}
                         rightToLeft
                         color={props.color}
+                        resized={props.resized}
                         pixelControl={props.pixelControl}
                         r={props.r} 
                         g={props.g} 

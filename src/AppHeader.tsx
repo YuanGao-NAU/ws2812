@@ -1,10 +1,10 @@
-import { Button, Col, ColorPicker, Form, InputNumber, Row, Select, Space, Typography } from 'antd';
+import { Button, Col, Form, InputNumber, Row, Select, Typography } from 'antd';
 import { Directions, Mode, StartFrom } from './utils';
 import { AggregationColor } from 'antd/es/color-picker/color';
 import ColorPalette from './ColorPalette';
 
 const { Option } = Select;
-const { Title, Text } = Typography;
+const { Title } = Typography;
 
 interface AppHeaderProps {
   setDirection: (direction: Directions) => void;
@@ -22,22 +22,14 @@ const AppHeader = (props: AppHeaderProps) => {
   const [form] = Form.useForm();
   
   const onDirectionChange = (value: string) => {
-    var direction = Directions.TopToBottom;
+    var direction = Directions.vertical;
     switch(value) {
-      case "TopToBottom": {
-        direction = Directions.TopToBottom;
+      case "vertical": {
+        direction = Directions.vertical;
         break;
       }
-      case "BottomToTop": {
-        direction = Directions.BottomToTop;
-        break;
-      }
-      case "LeftToRight": {
-        direction = Directions.LeftToRight;
-        break;
-      }
-      case "RightToLeft": {
-        direction = Directions.RightToLeft;
+      case "horizontal": {
+        direction = Directions.horizontal;
         break;
       }
     }
@@ -119,16 +111,14 @@ const AppHeader = (props: AppHeaderProps) => {
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           form={form}
-          initialValues={{ "direction": "TopToBottom", "startFrom": "UpperLeft", "mode": "S", "rows": 4, "columns": 4 }}
+          initialValues={{ "direction": "vertical", "startFrom": "UpperLeft", "mode": "S", "rows": 4, "columns": 4 }}
         >
           {/* <Col xs={12} sm={6} md={4} lg={3}>     */}
             {/* <Text>Direction</Text> */}
             <Form.Item name="direction" label="Direction">
               <Select style={{ width: '100%' }}>
-                <Option value="TopToBottom">Top to Bottom</Option>
-                <Option value="BottomToTop">Bottom to Top</Option>
-                <Option value="LeftToRight">Left to Right</Option>
-                <Option value="RightToLeft">Right to Left</Option>
+                <Option value="vertical">Vertical</Option>
+                <Option value="horizontal">Horizontal</Option>
               </Select>
             </Form.Item>
           {/* </Col> */}
